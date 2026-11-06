@@ -16,4 +16,12 @@ resource "aws_security_group" "main" {
         protocol = "-1"
         cidr_blocks = ["0.0.0.0"]
     }
+
+    tags = merge (
+        var.sg_name,
+        local.common_tags,
+        {
+            Name = "${var.project_name}-${var.environment}"
+        }
+    )
 }
